@@ -10,6 +10,7 @@
 	<artifactId>worblehat-domain</artifactId>
 	<name>worblehat-domain</name>
 
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
