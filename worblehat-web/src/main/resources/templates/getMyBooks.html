@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>List All My Books - Worblehat Bookmanager</title>
+</head>
+<body>
+<h1>List all My Books</h1>
+
+<form th:object="${getMyBooksFormData}" method="POST">
+	Email Address:<input id="emailAddress" type="text" th:field="*{emailAddress}" />
+	<span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
+	<br />
+	<input type="submit" id="getMyBooks" value="Get My Books" />
+
+</form>
+
+<hr />
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>
