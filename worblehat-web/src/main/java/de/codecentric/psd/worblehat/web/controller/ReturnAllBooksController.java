@@ -38,7 +38,7 @@ public class ReturnAllBooksController {
 		if (result.hasErrors()) {
 			return "returnAllBooks";
 		} else {
-			if (formData.getIsbn() != null && formData.getIsbn().isEmpty()) {
+			if (formData.getIsbn() == null || formData.getIsbn().isEmpty()) {
 				bookService.returnAllBooksByBorrower(formData.getEmailAddress());
 			} else {
 				bookService.returnBookByBorrowerAndIsbn(formData.getEmailAddress(), formData.getIsbn());
