@@ -18,7 +18,7 @@ public class BookDataFormData {
 	private String edition;
 
 	@NotEmpty(message = "{empty.bookDataFormData.yearOfPublication}")
-	@Numeric(message = "{notvalid.bookDataFormData.yearOfPublication}")
+	@Numeric(message = "{notvalid.bookDataFormDxata.yearOfPublication}")
 	@Length(message = "{invalid.length.bookDataFormData.yearOfPublication}", min = 4, max = 4)
 	private String yearOfPublication;
 

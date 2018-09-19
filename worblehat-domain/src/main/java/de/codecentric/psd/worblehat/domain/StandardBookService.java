@@ -40,6 +40,17 @@ public class StandardBookService implements BookService {
 	}
 
 	@Override
+	public void returnBookByBorrowerAndIsbn(String borrower, String isbn) {
+		List<Borrowing> borrowingsByUser = borrowingRepository
+				.findBorrowingsByBorrower(borrower);
+		for (Borrowing borrowing : borrowingsByUser) {
+			if (borrowing.getBorrowedBook().getIsbn().equals(isbn)) {
+				borrowingRepository.delete(borrowing);
+			}
+		}
+	}
+
+	@Override
 	public Optional<Borrowing> borrowBook(String isbn, String borrower) {
 		Set<Book> books = bookRepository.findByIsbn(isbn);
 

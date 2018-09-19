@@ -1,16 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Return All Books - Worblehat Bookmanager</title>
+<title>Return Books - Worblehat Bookmanager</title>
 </head>
 <body>
-	<h1>Return all Books</h1>
+	<h1>Return Books</h1>
 
 	<form th:object="${returnAllBookFormData}" method="POST">
 		 Email Address:<input id="emailAddress" type="text" th:field="*{emailAddress}" />
 		<span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
 		<br />
-		<input type="submit" id="returnAllBooks" value="Return All Books" />
+		ISBN:<input id="isbn" type="text" th:field="*{isbn}" />
+		<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+		<br />
+        <p>If you don't enter an ISBN all books will be returned.</p>
+		<input type="submit" id="returnAllBooks" value="Return Book(s)" />
 
 	</form>
 

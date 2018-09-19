@@ -1,5 +1,6 @@
 package de.codecentric.psd.worblehat.web.formdata;
 
+import de.codecentric.psd.worblehat.web.validation.ISBN;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -12,6 +13,9 @@ public class ReturnAllBooksFormData {
 	@Email(message = "{notvalid.returnAllBookFormData.emailAddress}")
 	private String emailAddress;
 
+	@ISBN(message = "{notvalid.returnOneBook.isbn}")
+	private String isbn;
+
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -20,4 +24,11 @@ public class ReturnAllBooksFormData {
 		this.emailAddress = emailAddress;
 	}
 
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 }
