@@ -20,6 +20,8 @@ public interface BookService {
 
 	List<Book> findAllBooks();
 
+	List<Borrowing> findBooksByEmail(String email);
+
 	Optional<Book> createBook(String title, String author, String edition, String isbn, int yearOfPublication);
 
 	boolean bookExists(String isbn);

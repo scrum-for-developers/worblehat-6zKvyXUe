@@ -13,16 +13,18 @@
 			<th>Edition</th>
 			<th>ISBN</th>
 			<th>Borrower</th>
+			<th>Rückgabedatum</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="book : ${books}">
-			<td th:text="${book.title}">Harry Potter</td>
-			<td th:text="${book.author}">J.K. Rowling</td>
-			<td th:text="${book.yearOfPublication}">2002</td>
-			<td th:text="${book.edition}">1st</td>
-			<td th:text="${book.isbn}">123456</td>
-			<td th:text="${book?.borrowing?.borrowerEmailAddress}">someone@codecentric.de</td>
+		<tr th:each="borrowing : ${borrowings}">
+			<td th:text="${borrowing.borrowedBook.title}">Harry Potter</td>
+			<td th:text="${borrowing.borrowedBook.author}">J.K. Rowling</td>
+			<td th:text="${borrowing.borrowedBook.yearOfPublication}">2002</td>
+			<td th:text="${borrowing.borrowedBook.edition}">1st</td>
+			<td th:text="${borrowing.borrowedBook.isbn}">123456</td>
+			<td th:text="${borrowing.borrowerEmailAddress}">someone@codecentric.de</td>
+			<td th:text="${borrowing.returnDate}">someone@codecentric.de</td>
 		</tr>
 	</tbody>
 	</table>
