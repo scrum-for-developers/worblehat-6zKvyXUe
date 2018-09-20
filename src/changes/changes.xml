@@ -39,6 +39,9 @@
 			<action dev="Tito, Dennis, Max" type="update">
 				WB-111: Add a description to books.
 			</action>
+			<action dev="Tommy" type="update">
+				WB-103: Return single books.
+			</action>
 		</release>
 	</body>
 </document>
