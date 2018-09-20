@@ -29,8 +29,6 @@ public class MyBookListController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String setupForm(ModelMap modelMap, @RequestParam(value = "email") String email) {
-		// TODO Datenbankabfrage
-
 		modelMap.addAttribute("borrowings", bookService.findBooksByEmail(email));
 
 		LOG.info("email: " + email);

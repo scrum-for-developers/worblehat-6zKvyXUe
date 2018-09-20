@@ -18,6 +18,10 @@ public class ReturnAllBooksFormData {
 
     private String title;
 
+    private String[] radioButtonValues = new String[]{"ISBN", "Title"};
+
+    private String radioButtonSelection = "ISBN";
+
     public String getTitle() {
         return title;
     }
@@ -25,10 +29,6 @@ public class ReturnAllBooksFormData {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    private String[] radioButtonValues = new String[]{"ISBN", "Title"};
-
-    private String radioButtonSelection = "ISBN";
 
     public String getEmailAddress() {
         return emailAddress;

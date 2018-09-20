@@ -27,6 +27,7 @@ import java.util.Set;
 public class BorrowBookController {
 
 	public static final String TARGET_BORROW_PAGE = "borrow";
+	public static final String ERROR_HANDLING_REDIRECT = "home";
 	private BookService bookService;
 
 	@Autowired
@@ -63,6 +64,6 @@ public class BorrowBookController {
 
 	@ExceptionHandler(Exception.class)
 	public String handleErrors(Exception ex, HttpServletRequest request) {
-		return "home";
+		return ERROR_HANDLING_REDIRECT;
 	}
 }
