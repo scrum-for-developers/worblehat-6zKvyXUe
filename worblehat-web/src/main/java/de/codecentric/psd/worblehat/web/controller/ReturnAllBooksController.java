@@ -38,8 +38,8 @@ public class ReturnAllBooksController {
 		if (result.hasErrors()) {
 			return "returnAllBooks";
 		} else {
-			if ((formData.getRadioButtonSelection().equals("ISBN") && (formData.getIsbn() == null || formData.getIsbn().isEmpty()))
-					&& (formData.getRadioButtonSelection().equals("Title") && (formData.getTitle() == null || formData.getTitle().isEmpty()))) {
+			if (formData.getIsbn() == null || formData.getIsbn().isEmpty()
+					&& (formData.getTitle() == null || formData.getTitle().isEmpty())) {
 				bookService.returnAllBooksByBorrower(formData.getEmailAddress());
 			} else if (formData.getRadioButtonSelection().equals("ISBN")) {
 				bookService.returnBookByBorrowerAndIsbn(formData.getEmailAddress(), formData.getIsbn());
