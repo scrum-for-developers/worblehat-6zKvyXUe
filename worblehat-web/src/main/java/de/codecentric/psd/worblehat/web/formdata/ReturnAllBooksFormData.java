@@ -24,7 +24,7 @@ public class ReturnAllBooksFormData {
     private String radioButtonSelection = "ISBN";
 
     public String getTitle() {
-        return title;
+        return title.trim();
     }
 
     public void setTitle(String title) {
@@ -32,7 +32,7 @@ public class ReturnAllBooksFormData {
     }
 
     public String getEmailAddress() {
-        return emailAddress;
+        return emailAddress == null ? null : emailAddress.trim();
     }
 
     public void setEmailAddress(String emailAddress) {
@@ -40,7 +40,7 @@ public class ReturnAllBooksFormData {
     }
 
     public String getIsbn() {
-        return isbn;
+        return isbn == null ? null : isbn.trim();
     }
 
     public void setIsbn(String isbn) {
@@ -56,7 +56,7 @@ public class ReturnAllBooksFormData {
     }
 
     public String getRadioButtonSelection() {
-        return radioButtonSelection;
+        return radioButtonSelection == null ? null : radioButtonSelection.trim();
     }
 
     public void setRadioButtonSelection(String radioButtonSelection) {

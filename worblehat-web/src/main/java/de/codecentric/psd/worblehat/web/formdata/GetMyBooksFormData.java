@@ -13,7 +13,7 @@ public class GetMyBooksFormData {
 	private String emailAddress;
 
 	public String getEmailAddress() {
-		return emailAddress;
+		return emailAddress == null ? null : emailAddress.trim();
 	}
 
 	public void setEmailAddress(String emailAddress) {
