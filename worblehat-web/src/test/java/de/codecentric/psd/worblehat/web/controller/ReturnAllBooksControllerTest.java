@@ -64,4 +64,32 @@ public class ReturnAllBooksControllerTest {
         verify(bookService).returnAllBooksByBorrower(borrower);
         assertThat(navigateTo, is("home"));
     }
+
+    @Test
+    public void shouldReturnBookByIsbnAndNavigateHome() throws Exception {
+        String borrower = "someone@codecentric.de";
+        String isbn = "123456789X";
+        returnAllBooksFormData.setEmailAddress(borrower);
+        returnAllBooksFormData.setIsbn(isbn);
+        returnAllBooksFormData.setRadioButtonSelection("ISBN");
+
+        String navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult);
+
+        verify(bookService).returnBookByBorrowerAndIsbn(borrower, isbn);
+        assertThat(navigateTo, is("home"));
+    }
+
+    @Test
+    public void shouldReturnBookByTitleAndNavigateHome() throws Exception {
+        String borrower = "someone@codecentric.de";
+        String title = "A book";
+        returnAllBooksFormData.setEmailAddress(borrower);
+        returnAllBooksFormData.setTitle(title);
+        returnAllBooksFormData.setRadioButtonSelection("Title");
+
+        String navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult);
+
+        verify(bookService).returnBookByBorrowerAndTitle(borrower, title);
+        assertThat(navigateTo, is("home"));
+    }
 }
