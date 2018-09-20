@@ -16,10 +16,6 @@ import java.util.Set;
 @Transactional
 public class StandardBookService implements BookService {
 
-	public StandardBookService() {
-
-	}
-
 	@Autowired
 	public StandardBookService(BorrowingRepository borrowingRepository, BookRepository bookRepository) {
 		this.borrowingRepository = borrowingRepository;
