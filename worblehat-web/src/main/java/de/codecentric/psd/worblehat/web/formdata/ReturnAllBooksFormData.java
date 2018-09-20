@@ -24,7 +24,7 @@ public class ReturnAllBooksFormData {
     private String radioButtonSelection = "ISBN";
 
     public String getTitle() {
-        return title.trim();
+        return title == null ? null : title.trim();
     }
 
     public void setTitle(String title) {
