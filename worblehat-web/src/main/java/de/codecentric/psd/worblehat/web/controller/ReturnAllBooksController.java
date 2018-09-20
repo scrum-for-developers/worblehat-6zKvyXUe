@@ -41,9 +41,9 @@ public class ReturnAllBooksController {
 			if (formData.getIsbn() == null || formData.getIsbn().isEmpty()
 					&& (formData.getTitle() == null || formData.getTitle().isEmpty())) {
 				bookService.returnAllBooksByBorrower(formData.getEmailAddress());
-			} else if (formData.getRadioButtonSelection().equals("ISBN")) {
+			} else if ("ISBN".equals(formData.getRadioButtonSelection())) {
 				bookService.returnBookByBorrowerAndIsbn(formData.getEmailAddress(), formData.getIsbn());
-			} else if (formData.getRadioButtonSelection().equals("Title")){
+			} else if ("Title".equals(formData.getRadioButtonSelection())){
 				bookService.returnBookByBorrowerAndTitle(formData.getEmailAddress(), formData.getTitle());
 			}
 			return "home";
