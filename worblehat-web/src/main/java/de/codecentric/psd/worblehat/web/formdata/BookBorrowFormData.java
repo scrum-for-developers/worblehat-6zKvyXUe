@@ -1,15 +1,16 @@
 package de.codecentric.psd.worblehat.web.formdata;
 
 import de.codecentric.psd.worblehat.web.validation.ISBN;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Form data object from the borrow view.
  */
 public class BookBorrowFormData {
 
-	@NotEmpty(message = "{empty.borrowCmd.isbn}") 
+	@NotEmpty(message = "{empty.borrowCmd.isbn}")
 	@ISBN(message = "{notvalid.borrowCmd.isbn}")
 	private String isbn;
 
