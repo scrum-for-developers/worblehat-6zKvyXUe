@@ -43,5 +43,12 @@
 				WB-103: Return single books.
 			</action>
 		</release>
+
+		<release version="1.3.0" date="2018-09-20"
+				 description="Releasse with much improved functionality">
+			<action dev="Philipp" type="update">
+				WB-117: Accept 10- and 13-digit ISBN.
+			</action>
+		</release>
 	</body>
 </document>
