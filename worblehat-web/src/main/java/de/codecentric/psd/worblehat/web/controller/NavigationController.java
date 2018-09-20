@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class NavigationController {
 
+	public static final String HOME_NAVIGATION = "home";
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "home";
+		return HOME_NAVIGATION;
 	}
 
 }
