@@ -38,10 +38,13 @@ public class ReturnAllBooksController {
 		if (result.hasErrors()) {
 			return "returnAllBooks";
 		} else {
-			if (formData.getIsbn() == null || formData.getIsbn().isEmpty()) {
+			if ((formData.getRadioButtonSelection().equals("ISBN") && (formData.getIsbn() == null || formData.getIsbn().isEmpty()))
+					&& (formData.getRadioButtonSelection().equals("Title") && (formData.getTitle() == null || formData.getTitle().isEmpty()))) {
 				bookService.returnAllBooksByBorrower(formData.getEmailAddress());
-			} else {
+			} else if (formData.getRadioButtonSelection().equals("ISBN")) {
 				bookService.returnBookByBorrowerAndIsbn(formData.getEmailAddress(), formData.getIsbn());
+			} else if (formData.getRadioButtonSelection().equals("Title")){
+				bookService.returnBookByBorrowerAndTitle(formData.getEmailAddress(), formData.getTitle());
 			}
 			return "home";
 		}

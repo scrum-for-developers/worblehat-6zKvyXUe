@@ -2,6 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Return Books - Worblehat Bookmanager</title>
+<style>
+	ul li {
+		display:inline;
+	}
+</style>
 </head>
 <body>
 	<h1>Return Books</h1>
@@ -13,7 +18,16 @@
 		ISBN:<input id="isbn" type="text" th:field="*{isbn}" />
 		<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
 		<br />
-        <p>If you don't enter an ISBN all books will be returned.</p>
+		Title:<input id="title" type="text" th:field="*{title}" />
+		<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+		<ul>
+			<li th:each="ty : *{radioButtonValues}">
+				<input type="radio" th:field="*{radioButtonSelection}" th:value="${ty}" th:checked="*{radioButtonSelection}" />
+				<label th:for="${ty}" th:text="${ty}"></label>
+			</li>
+		</ul>
+		<br />
+        <p>If you don't enter an ISBN or title all books will be returned.</p>
 		<input type="submit" id="returnAllBooks" value="Return Book(s)" />
 
 	</form>
