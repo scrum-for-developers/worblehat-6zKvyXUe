@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
 public class GetMyBooksFormDataTest {
@@ -25,5 +26,11 @@ public class GetMyBooksFormDataTest {
     public void getEmailAddressWithoutWhitespaces() {
         formData.setEmailAddress("ohne");
         assertThat(formData.getEmailAddress(), is("ohne"));
+    }
+
+    @Test
+    public void getNullEmail() {
+        formData.setEmailAddress(null);
+        assertThat(formData.getEmailAddress(), is(nullValue()));
     }
 }
