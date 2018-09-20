@@ -26,6 +26,7 @@ CREATE TABLE borrowing(
 INSERT INTO book(title, author, edition, isbn, year_of_publication)
 VALUES
   ("Harry Potter and the Philisopher's Stone", "J.K. Rowling", "", "0747532699", 1997),
+  ("Harry Potter and the Chamber of Secrets", "J.K. Rowling", "", "0747542100", 1998),
   ("Harry Potter and the Prisoner of Azkaban", "J.K. Rowling", "", "0747542155", 1999),
   ("Harry Potter and the Goblet of Fire", "J.K. Rowling", "", "074754624X", 2000),
   ("Harry Potter and the Order of the Phoenix", "J.K. Rowling", "", "0747551006", 2003),

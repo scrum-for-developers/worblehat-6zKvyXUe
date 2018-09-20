@@ -4,7 +4,7 @@
 	<title>Show all Books</title>
 </head>
 <body>
-	<table class="bookList">
+	<table class="bookList" cellpadding="10">
 	<thead>
 		<tr>
 			<th>Title</th>
@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr th:each="book : ${books}">
+		<tr th:each="book : ${books}" >
 			<td th:text="${book.title}">Harry Potter</td>
 			<td th:text="${book.author}">J.K. Rowling</td>
 			<td th:text="${book.yearOfPublication}">2002</td>
