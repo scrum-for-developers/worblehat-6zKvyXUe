@@ -1,8 +1,6 @@
 package de.codecentric.psd.worblehat.web.controller;
 
-import de.codecentric.psd.worblehat.domain.BookService;
 import de.codecentric.psd.worblehat.web.formdata.GetMyBooksFormData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,12 +17,7 @@ import javax.validation.Valid;
 @RequestMapping("/getMyBooks")
 public class GetMyBooksController {
 
-	private BookService bookService;
-
-	@Autowired
-	public GetMyBooksController(BookService bookService) {
-		this.bookService = bookService;
-	}
+	public GetMyBooksController() {}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public void prepareView(ModelMap modelMap) {
@@ -32,7 +25,7 @@ public class GetMyBooksController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String returnAllBooks(
+	public String getMyBooks(
 			@ModelAttribute("getMyBooksFormData") @Valid GetMyBooksFormData formData,
 			BindingResult result) {
 		if (result.hasErrors()) {
