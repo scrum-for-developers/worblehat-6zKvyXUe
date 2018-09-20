@@ -23,8 +23,9 @@
 			<td th:text="${book.yearOfPublication}">2002</td>
 			<td th:text="${book.edition}">1st</td>
 			<td th:text="${book.isbn}">123456</td>
-			<td style="max-width:100px;">Some long long long long long long long long long long long long long long long long description</td>
+			<td style="max-width:100px;" th:text="${book.description}">description</td>
 			<td th:text="${book?.borrowing?.borrowerEmailAddress}">someone@codecentric.de</td>
+
 		</tr>
 	</tbody>
 	</table>
