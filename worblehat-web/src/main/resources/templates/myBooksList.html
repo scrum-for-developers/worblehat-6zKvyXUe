@@ -24,7 +24,7 @@
 			<td th:text="${borrowing.borrowedBook.yearOfPublication}">2002</td>
 			<td th:text="${borrowing.borrowedBook.edition}">1st</td>
 			<td th:text="${borrowing.borrowedBook.isbn}">123456</td>
-			<td style="max-width:100px;" th:text="${borrowing.borrowedBook.description}">description</td>
+			<td style="max-width:400px; white-space: pre-line; word-wrap: break-word;" th:text="${borrowing.borrowedBook.description}">description</td>
 			<td th:text="${borrowing.borrowerEmailAddress}">someone@codecentric.de</td>
 			<td th:text="${borrowing.returnDate}">someone@codecentric.de</td>
 		</tr>
