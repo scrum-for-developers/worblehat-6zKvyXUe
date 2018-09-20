@@ -24,6 +24,10 @@ public class StandardBookServiceTest {
 
 	private static final String BORROWER_EMAIL = "someone@codecentric.de";
 
+	private static final String ISBN = "123456789X";
+
+	private static final String TITLE = "title2";
+
 	private static final DateTime NOW = DateTime.now();
 
 	private Book aBook, aCopyofBook, anotherBook;
@@ -37,7 +41,7 @@ public class StandardBookServiceTest {
 	public void setup() {
 		aBook = new Book("title", "author", "edition", "isbn", 2016);
 		aCopyofBook = new Book("title", "author", "edition", "isbn", 2016);
-		anotherBook = new Book("title2", "author2", "edition2", "isbn2", 2016);
+		anotherBook = new Book(TITLE, "author2", "edition2", "isbn2", 2016);
 
 		aBorrowedBook = new Book("title", "author", "edition", "isbn", 2016);
 		aBorrowing = new Borrowing(aBorrowedBook, BORROWER_EMAIL, NOW);
@@ -47,7 +51,7 @@ public class StandardBookServiceTest {
 		aBorrowingOfCopy = new Borrowing(aCopyofBorrowedBook, BORROWER_EMAIL, NOW);
 		aCopyofBorrowedBook.borrowNowByBorrower(BORROWER_EMAIL);
 
-		anotherBorrowedBook = new Book("title2", "author2", "edition2", "isbn2", 2016);
+		anotherBorrowedBook = new Book("title2", "author2", "edition2", ISBN, 2016);
 		anotherBorrowing = new Borrowing(anotherBorrowedBook, BORROWER_EMAIL, NOW);
 		anotherBorrowedBook.borrowNowByBorrower(BORROWER_EMAIL);
 
@@ -60,6 +64,8 @@ public class StandardBookServiceTest {
 		when(borrowingRepository.findBorrowingForBook(aBook)).thenReturn(null);
 
 		bookService = new StandardBookService(borrowingRepository, bookRepository);
+		when(bookService.findBooksByEmail(BORROWER_EMAIL))
+				.thenReturn(Arrays.asList(aBorrowing, anotherBorrowing));
 
 	}
 
@@ -81,6 +87,18 @@ public class StandardBookServiceTest {
 	@Test
 	public void shouldReturnAllBooksOfOnePerson() {
 		bookService.returnAllBooksByBorrower(BORROWER_EMAIL);
+		verify(borrowingRepository).delete(anotherBorrowing);
+	}
+
+	@Test
+	public void shouldReturnAllBooksOfOnePersonWithISBN() {
+		bookService.returnBookByBorrowerAndIsbn(BORROWER_EMAIL, ISBN);
+		verify(borrowingRepository).delete(anotherBorrowing);
+	}
+
+	@Test
+	public void shouldReturnAllBooksOfOnePersonWithTitle() {
+		bookService.returnBookByBorrowerAndTitle(BORROWER_EMAIL, TITLE);
 		verify(borrowingRepository).delete(anotherBorrowing);
 	}
 
@@ -204,7 +222,8 @@ public class StandardBookServiceTest {
 
 	@Test
 	public void shouldVerifyExistingBooks() {
-		when(bookRepository.findByIsbn(aBook.getIsbn())).thenReturn(Collections.singleton(aBook));
+		when(bookService.findBooksByIsbn(aBook.getIsbn())).thenReturn(Collections.singleton(aBook));
+		//when(bookRepository.findByIsbn(aBook.getIsbn())).thenReturn(Collections.singleton(aBook));
 		Boolean bookExists = bookService.bookExists(aBook.getIsbn());
 		assertTrue(bookExists);
 	}
