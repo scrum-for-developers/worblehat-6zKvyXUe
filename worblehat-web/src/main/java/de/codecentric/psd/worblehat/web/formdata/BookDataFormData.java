@@ -33,47 +33,47 @@ public class BookDataFormData {
 	private String description;
 
 	public String getYearOfPublication() {
-		return yearOfPublication.trim();
+		return yearOfPublication;
 	}
 
 	public void setYearOfPublication(String yearOfPublication) {
-		this.yearOfPublication = yearOfPublication;
+		this.yearOfPublication = yearOfPublication.trim();
 	}
 
 	public String getIsbn() {
-		return isbn.trim();
+		return isbn;
 	}
 
 	public void setIsbn(String isbn) {
-		this.isbn = isbn;
+		this.isbn = isbn.trim();
 	}
 
 	public String getAuthor() {
-		return author.trim();
+		return author;
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		this.author = author.trim();
 	}
 
 	public String getTitle() {
-		return title.trim();
+		return title;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = title.trim();
 	}
 
 	public String getEdition() {
-		return edition.trim();
+		return edition;
 	}
 
 	public void setEdition(String edition) {
-		this.edition = edition;
+		this.edition = edition.trim();
 	}
 
 	public String getDescription() {
-		return description.trim();
+		return description;
 	}
 
 	public void setDescription(String description) {
