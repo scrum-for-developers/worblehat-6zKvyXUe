@@ -75,6 +75,12 @@ public class BookDataFormData {
 		return description;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "BookDataFormData [title=" + title + ", edition=" + edition

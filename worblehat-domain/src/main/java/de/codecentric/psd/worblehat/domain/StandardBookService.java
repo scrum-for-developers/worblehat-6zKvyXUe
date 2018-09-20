@@ -82,8 +82,24 @@ public class StandardBookService implements BookService {
 									 @Nonnull String author,
 									 @Nonnull String edition,
 									 @Nonnull String isbn,
+									 int yearOfPublication) {
+		Book book = new Book(title, author, edition, isbn, yearOfPublication);
+
+		Optional<Book> bookFromRepo = bookRepository.findTopByIsbn(isbn);
+
+        if (!bookFromRepo.isPresent() || book.isSameCopy(bookFromRepo.get())) {
+            return Optional.of(bookRepository.save(book));
+        } else
+            return Optional.empty();
+	}
+
+	@Override
+	public Optional<Book> createBook(@Nonnull String title,
+									 @Nonnull String author,
+									 @Nonnull String edition,
+									 @Nonnull String isbn,
 									 int yearOfPublication,
-									 @Nonnull String description) {
+                                     String description) {
 		Book book = new Book(title, author, edition, isbn, yearOfPublication, description);
 
 		Optional<Book> bookFromRepo = bookRepository.findTopByIsbn(isbn);
