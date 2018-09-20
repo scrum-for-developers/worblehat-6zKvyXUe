@@ -4,7 +4,6 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,17 +28,6 @@ public class Borrowing implements Serializable {
 	@OneToOne()
 	private Book borrowedBook;
 
-	public String getBorrowerEmailAddress() {
-		return borrowerEmailAddress;
-	}
-
-	public String getReturnDate() {
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(borrowDate);
-		cal.add(Calendar.DAY_OF_MONTH, 21);
-		return new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime());
-	}
-
 	/**
 	 * @param book
 	 * The borrowed book
@@ -47,7 +35,7 @@ public class Borrowing implements Serializable {
 	 * The borrowers e-mail Address
 	 * @param borrowDate
 	 * The borrow date
-     */
+	 */
 	public Borrowing(Book book, String borrowerEmailAddress, DateTime borrowDate) {
 		super();
 		this.borrowedBook = book;
@@ -61,6 +49,17 @@ public class Borrowing implements Serializable {
 
 	private Borrowing() {
 		// for JPA
+	}
+
+	public String getBorrowerEmailAddress() {
+		return borrowerEmailAddress;
+	}
+
+	public String getReturnDate() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(borrowDate);
+		cal.add(Calendar.DAY_OF_MONTH, 21);
+		return new SimpleDateFormat("dd.MM.yyyy").format(cal.getTime());
 	}
 
 	public Book getBorrowedBook() {
