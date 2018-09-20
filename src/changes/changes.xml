@@ -30,6 +30,9 @@
 			<action dev="Max" type="update">
 				WB-126: Display application version on all pages.
 			</action>
+			<action dev="Philipp" type="update">
+				WB-127: ISBN is unique per book edition.
+			</action>
 		</release>
 	</body>
 </document>
