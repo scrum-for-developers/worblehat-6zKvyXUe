@@ -15,12 +15,16 @@ public class Worblehat {
 
 		// this code is basically to (a) demonstrate how to stop a Spring application and (b)
 		// get rid of the SonarQube warning to close the context properly
-		System.out.println("Enter 'stop' to stop Worblehat.");
+		//System.out.println("Enter 'stop' to stop Worblehat.");
 		String line;
 		do {
 			line = scan.nextLine();
 		} while (!"stop".equals(line));
 		applicationContext.close();
+	}
+
+	private Worblehat() {
+		//Private constructor to hide the public one
 	}
 
 }
