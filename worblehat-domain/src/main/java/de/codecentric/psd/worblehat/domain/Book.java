@@ -25,6 +25,7 @@ public class Book implements Serializable {
 	// TODO: convert String to an ISBN class, that ensures a valid ISBN
 	private String isbn;
 	private int yearOfPublication;
+	private String description;
 
 	@OneToOne(mappedBy = "borrowedBook", orphanRemoval = true)
 	private Borrowing borrowing;
@@ -61,6 +62,7 @@ public class Book implements Serializable {
 		this.edition = edition;
 		this.isbn = isbn;
 		this.yearOfPublication = yearOfPublication;
+		this.description;
 	}
 
 	public String getTitle() {
@@ -83,6 +85,10 @@ public class Book implements Serializable {
 		return yearOfPublication;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -101,6 +107,10 @@ public class Book implements Serializable {
 
 	public void setYearOfPublication(int yearOfPublication) {
 		this.yearOfPublication = yearOfPublication;
+	}
+
+	public void setDescription(this.description) {
+		this.description = description;
 	}
 
     public Borrowing getBorrowing() {
@@ -124,7 +134,8 @@ public class Book implements Serializable {
 				", author='" + author + '\'' +
 				", edition='" + edition + '\'' +
 				", isbn='" + isbn + '\'' +
-				", yearOfPublication=" + yearOfPublication +
+				", yearOfPublication=" + yearOfPublication + '\'' +
+				", description='" + description ‚ +
 				'}';
 	}
 }

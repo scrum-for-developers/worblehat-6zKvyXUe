@@ -82,8 +82,9 @@ public class StandardBookService implements BookService {
 									 @Nonnull String author,
 									 @Nonnull String edition,
 									 @Nonnull String isbn,
-									 int yearOfPublication) {
-		Book book = new Book(title, author, edition, isbn, yearOfPublication);
+									 int yearOfPublication,
+									 @Nonnull String description) {
+		Book book = new Book(title, author, edition, isbn, yearOfPublication, description);
 
 		Optional<Book> bookFromRepo = bookRepository.findTopByIsbn(isbn);
 
