@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -91,7 +90,8 @@ public class StandardBookService implements BookService {
 
 		Optional<Book> bookFromRepo = bookRepository.findTopByIsbn(isbn);
 
-        if (!bookFromRepo.isPresent() || book.isSameCopy(bookFromRepo.get())) {
+        if (!bookFromRepo.isPresent() ||
+				(book.isSameCopy(bookFromRepo.get()) && book.isSameEdition(bookFromRepo.get()))) {
             return Optional.of(bookRepository.save(book));
         } else
             return Optional.empty();
