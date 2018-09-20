@@ -2,7 +2,6 @@ package de.codecentric.psd.worblehat.web.controller;
 
 import de.codecentric.psd.worblehat.domain.Book;
 import de.codecentric.psd.worblehat.domain.BookService;
-import de.codecentric.psd.worblehat.domain.StandardBookService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.ModelMap;

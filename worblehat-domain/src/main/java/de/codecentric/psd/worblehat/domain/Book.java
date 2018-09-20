@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * Entity implementation class for Entity: Book

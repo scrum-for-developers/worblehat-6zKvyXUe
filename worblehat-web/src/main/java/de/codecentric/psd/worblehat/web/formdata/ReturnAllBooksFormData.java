@@ -1,10 +1,8 @@
 package de.codecentric.psd.worblehat.web.formdata;
 
 import de.codecentric.psd.worblehat.web.validation.ISBN;
-import de.codecentric.psd.worblehat.web.validation.ISBNConstraintValidator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This class represent the form data of the return book form.

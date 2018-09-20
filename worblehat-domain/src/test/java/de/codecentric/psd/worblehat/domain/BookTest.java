@@ -3,8 +3,6 @@ package de.codecentric.psd.worblehat.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
