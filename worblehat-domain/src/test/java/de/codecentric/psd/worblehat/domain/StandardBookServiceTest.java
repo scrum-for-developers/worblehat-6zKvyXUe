@@ -31,6 +31,8 @@ public class StandardBookServiceTest {
 	private Book aBorrowedBook, aCopyofBorrowedBook, anotherBorrowedBook;
 	private Borrowing aBorrowing, aBorrowingOfCopy, anotherBorrowing;
 
+	private ArgumentCaptor<Book> bookArgumentCaptor;
+
 	@Before
 	public void setup() {
 		aBook = new Book("title", "author", "edition", "isbn", 2016);
@@ -133,8 +135,22 @@ public class StandardBookServiceTest {
 		bookService.createBook(aBook.getTitle(), aBook.getAuthor(), aBook.getEdition(),
 				aBook.getIsbn(), aBook.getYearOfPublication());
 
+		assertBookSavedToRepositoryAndInfoPassedCorrectly();
+	}
+
+	@Test
+	public void shouldCreateBookWithDescription() {
+		when(bookRepository.save(any(Book.class))).thenReturn(aBook);
+		bookService.createBook(aBook.getTitle(), aBook.getAuthor(), aBook.getEdition(),
+				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getDescription());
+		assertBookSavedToRepositoryAndInfoPassedCorrectly();
+		assertThat(bookArgumentCaptor.getValue().getDescription(), is(aBook.getDescription()));
+
+	}
+
+	private void assertBookSavedToRepositoryAndInfoPassedCorrectly() {
 		// assert that book was saved to repository
-		ArgumentCaptor<Book> bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
+		bookArgumentCaptor = ArgumentCaptor.forClass(Book.class);
 		verify(bookRepository).save(bookArgumentCaptor.capture());
 
 		// assert that the information was passed correctly to create the book
@@ -150,6 +166,14 @@ public class StandardBookServiceTest {
 		when(bookRepository.save(any(Book.class))).thenReturn(aBook);
 		bookService.createBook(aBook.getTitle(), aBook.getAuthor(), aBook.getEdition(),
 				aBook.getIsbn(), aBook.getYearOfPublication());
+		verify(bookRepository, times(1)).save(any(Book.class));
+	}
+
+	@Test
+	public void shouldCreateAnotherCopyOfExistingBookWithDescription() {
+		when(bookRepository.save(any(Book.class))).thenReturn(aBook);
+		bookService.createBook(aBook.getTitle(), aBook.getAuthor(), aBook.getEdition(),
+				aBook.getIsbn(), aBook.getYearOfPublication(), aBook.getDescription());
 		verify(bookRepository, times(1)).save(any(Book.class));
 	}
 
