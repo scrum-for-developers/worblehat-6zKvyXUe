@@ -36,6 +36,9 @@
 			<action dev="Philipp" type="update">
 				WB-127: ISBN is unique per book edition.
 			</action>
+			<action dev="Tito, Dennis, Max" type="update">
+				WB-111: Add a description to books.
+			</action>
 		</release>
 	</body>
 </document>
