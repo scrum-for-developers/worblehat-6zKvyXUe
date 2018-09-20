@@ -17,7 +17,9 @@ import javax.validation.Valid;
 @RequestMapping("/getMyBooks")
 public class GetMyBooksController {
 
-	public GetMyBooksController() {}
+	public GetMyBooksController() {
+		//We just want to keep this nice empty constructor
+	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public void prepareView(ModelMap modelMap) {
