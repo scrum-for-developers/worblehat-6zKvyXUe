@@ -30,6 +30,19 @@
 			<td>Description</td>
 			<td th:text="${book.description}">Lorum Ipsum...</td>
 		</tr>
+		<tr>
+			<td>Current borrower</td>
+			<td th:text="${book.borrowing?.borrowerEmailAddress}">Mr. X</td>
+		</tr>
+        <tr>
+            <td>Remove</td>
+            <td>
+                <form th:switch="${book?.borrowing}" th:action="@{/bookDetails/delete/{id}(id=${book.id})}" method="get">
+                    <button th:case="null" type="submit">Remove</button>
+                    <button th:case="*" type="submit" disabled>Remove</button>
+                </form>
+            </td>
+        </tr>
 	</tbody>
 	</table>
 	<a th:href="@{/bookList}">Back to List</a>

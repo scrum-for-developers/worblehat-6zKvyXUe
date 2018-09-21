@@ -17,9 +17,9 @@ interface BookService {
 
     fun findBooksByIsbn(isbn: String): Set<Book>
 
-    fun findBookById(id: Long): Book
-
     fun findAllBooks(): List<Book>
+
+    fun findBookById(id: Long): Optional<Book>
 
     fun findBooksByEmail(email: String): List<Borrowing>
 
@@ -29,4 +29,6 @@ interface BookService {
     fun bookExists(isbn: String): Boolean
 
     fun deleteAllBooks()
+
+    fun deleteBookById(id: Long)
 }

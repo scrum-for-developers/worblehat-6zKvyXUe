@@ -13,9 +13,6 @@ import java.util.*
 open class StandardBookService @Autowired constructor(
         private val borrowingRepository: BorrowingRepository,
         private val bookRepository: BookRepository) : BookService {
-    override fun findBookById(id: Long): Book {
-        return bookRepository.findById(id).get()
-    }
 
     override fun returnAllBooksByBorrower(borrowerEmailAddress: String) {
         with(borrowingRepository) {
@@ -55,6 +52,10 @@ open class StandardBookService @Autowired constructor(
 
     override fun findAllBooks(): List<Book> {
         return bookRepository.findAllByOrderByTitle()
+    }
+
+    override fun findBookById(id: Long): Optional<Book> {
+        return bookRepository.findById(id)
     }
 
     override fun findBooksByEmail(email: String): List<Borrowing> {
@@ -102,5 +103,16 @@ open class StandardBookService @Autowired constructor(
         bookRepository.deleteAll()
     }
 
+    override fun deleteBookById(id: Long) {
+        val book = findBookById(id)
 
+        if (book.isPresent) {
+            val borrowing: Borrowing? = borrowingRepository.findBorrowingForBook(book.get())
+
+            if (borrowing == null) {
+                bookRepository.deleteById(id)
+            }
+        }
+
+    }
 }

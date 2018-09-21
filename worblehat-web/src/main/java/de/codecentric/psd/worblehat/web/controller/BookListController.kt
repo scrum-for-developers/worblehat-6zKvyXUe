@@ -4,6 +4,7 @@ import de.codecentric.psd.worblehat.domain.BookService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 
@@ -19,6 +20,14 @@ open class BookListController @Autowired constructor(private val bookService: Bo
         val books = bookService.findAllBooks()
         modelMap.addAttribute("books", books)
         return "bookList"
+    }
+
+    @RequestMapping("/delete/{id}", method = [RequestMethod.GET])
+    fun deleteBook(@PathVariable("id") id: Long, modelMap: ModelMap): String {
+        bookService.deleteBookById(id)
+        val books = bookService.findAllBooks()
+        modelMap.addAttribute("books", books)
+        return "redirect:/bookList"
     }
 
 }
