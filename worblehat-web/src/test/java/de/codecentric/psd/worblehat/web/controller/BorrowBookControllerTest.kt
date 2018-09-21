@@ -1,5 +1,9 @@
 package de.codecentric.psd.worblehat.web.controller
 
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import de.codecentric.psd.worblehat.domain.Book
 import de.codecentric.psd.worblehat.domain.BookService
 import de.codecentric.psd.worblehat.domain.Borrowing
@@ -10,8 +14,6 @@ import org.hamcrest.Matchers.not
 import org.hamcrest.Matchers.nullValue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Matchers.any
-import org.mockito.Mockito.*
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.ui.ModelMap
 import org.springframework.validation.BindingResult
@@ -21,7 +23,7 @@ import java.util.*
 
 class BorrowBookControllerTest {
 
-    private var bookService: BookService? = null
+    private var bookService: BookService = mock()
 
     private var borrowBookController: BorrowBookController? = null
 
@@ -31,10 +33,9 @@ class BorrowBookControllerTest {
 
     @Before
     fun setUp() {
-        bookService = mock(BookService::class.java)
         bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
         bookBorrowFormData = BookBorrowFormData()
-        borrowBookController = BorrowBookController(bookService!!)
+        borrowBookController = BorrowBookController(bookService)
     }
 
     @Test
@@ -57,7 +58,7 @@ class BorrowBookControllerTest {
 
     @Test
     fun shouldRejectBorrowingIfBookDoesNotExist() {
-        `when`(bookService!!.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(null)
+        whenever(bookService.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(null)
 
         val navigateTo = borrowBookController!!.processSubmit(bookBorrowFormData!!, bindingResult!!)
 
@@ -69,7 +70,7 @@ class BorrowBookControllerTest {
     fun shouldRejectAlreadyBorrowedBooks() {
         bookBorrowFormData!!.email = BORROWER_EMAIL
         bookBorrowFormData!!.isbn = TEST_BOOK.isbn
-        `when`(bookService!!.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(setOf(TEST_BOOK))
+        whenever(bookService.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(setOf(TEST_BOOK))
         val navigateTo = borrowBookController!!.processSubmit(bookBorrowFormData!!, bindingResult!!)
 
         assertThat(bindingResult!!.hasFieldErrors("isbn"), `is`(true))
@@ -81,11 +82,11 @@ class BorrowBookControllerTest {
     fun shouldNavigateHomeOnSuccess() {
         bookBorrowFormData!!.email = BORROWER_EMAIL
         bookBorrowFormData!!.isbn = TEST_BOOK.isbn
-        `when`(bookService!!.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(setOf(TEST_BOOK))
-        `when`(bookService!!.borrowBook(any(), any())).thenReturn(Optional.of(Borrowing(TEST_BOOK, BORROWER_EMAIL)))
+        whenever(bookService.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(setOf(TEST_BOOK))
+        whenever(bookService.borrowBook(any(), any())).thenReturn(Optional.of(Borrowing(TEST_BOOK, BORROWER_EMAIL)))
 
         val navigateTo = borrowBookController!!.processSubmit(bookBorrowFormData!!, bindingResult!!)
-        verify<BookService>(bookService).borrowBook(TEST_BOOK.isbn, BORROWER_EMAIL)
+        verify(bookService).borrowBook(TEST_BOOK.isbn, BORROWER_EMAIL)
         assertThat(navigateTo, `is`("home"))
     }
 
@@ -100,6 +101,6 @@ class BorrowBookControllerTest {
 
         private val TEST_BOOK = Book("title", "author", "edition", "isbn", 2016)
 
-        val BORROWER_EMAIL = "someone@codecentric.de"
+        const val BORROWER_EMAIL = "someone@codecentric.de"
     }
 }

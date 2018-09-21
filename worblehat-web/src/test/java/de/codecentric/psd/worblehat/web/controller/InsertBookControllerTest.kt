@@ -1,5 +1,9 @@
 package de.codecentric.psd.worblehat.web.controller
 
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import de.codecentric.psd.worblehat.domain.Book
 import de.codecentric.psd.worblehat.domain.BookService
 import de.codecentric.psd.worblehat.web.formdata.BookDataFormData
@@ -9,9 +13,7 @@ import org.hamcrest.Matchers.not
 import org.hamcrest.Matchers.nullValue
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Matchers.any
-import org.mockito.Matchers.anyInt
-import org.mockito.Mockito.*
+import org.mockito.ArgumentMatchers.anyInt
 import org.springframework.ui.ModelMap
 import org.springframework.validation.BindingResult
 import org.springframework.validation.MapBindingResult
@@ -22,7 +24,7 @@ class InsertBookControllerTest {
 
     private var insertBookController: InsertBookController? = null
 
-    private var bookService: BookService? = null
+    private var bookService: BookService = mock()
 
     private var bookDataFormData: BookDataFormData? = null
 
@@ -30,8 +32,7 @@ class InsertBookControllerTest {
 
     @Before
     fun setUp() {
-        bookService = mock(BookService::class.java)
-        insertBookController = InsertBookController(bookService!!)
+        insertBookController = InsertBookController(bookService)
         bookDataFormData = BookDataFormData()
         bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
     }
@@ -57,8 +58,8 @@ class InsertBookControllerTest {
     @Test
     fun shouldCreateNewCopyOfExistingBook() {
         setupFormData()
-        `when`(bookService!!.bookExists(TEST_BOOK.isbn)).thenReturn(true)
-        `when`(bookService!!.createBook(any(), any(), any(), any(), anyInt(), any())).thenReturn(Optional.of(TEST_BOOK))
+        whenever(bookService.bookExists(TEST_BOOK.isbn)).thenReturn(true)
+        whenever(bookService.createBook(any(), any(), any(), any(), anyInt(), any())).thenReturn(Optional.of(TEST_BOOK))
 
         val navigateTo = insertBookController!!.processSubmit(bookDataFormData!!, bindingResult!!)
 
@@ -69,8 +70,8 @@ class InsertBookControllerTest {
     @Test
     fun shouldCreateBookAndNavigateToBookList() {
         setupFormData()
-        `when`(bookService!!.bookExists(TEST_BOOK.isbn)).thenReturn(false)
-        `when`(bookService!!.createBook(any(), any(), any(), any(), anyInt(), any())).thenReturn(Optional.of(TEST_BOOK))
+        whenever(bookService.bookExists(TEST_BOOK.isbn)).thenReturn(false)
+        whenever(bookService.createBook(any(), any(), any(), any(), anyInt(), any())).thenReturn(Optional.of(TEST_BOOK))
 
         val navigateTo = insertBookController!!.processSubmit(bookDataFormData!!, bindingResult!!)
 
@@ -79,7 +80,7 @@ class InsertBookControllerTest {
     }
 
     private fun verifyBookIsCreated() {
-        verify<BookService>(bookService).createBook(TEST_BOOK.title, TEST_BOOK.author,
+        verify(bookService).createBook(TEST_BOOK.title, TEST_BOOK.author,
                 TEST_BOOK.edition, TEST_BOOK.isbn, TEST_BOOK.yearOfPublication, TEST_BOOK.description)
     }
 
@@ -93,7 +94,6 @@ class InsertBookControllerTest {
     }
 
     companion object {
-
         private val TEST_BOOK = Book("title", "author", "edition", "isbn", 2016, "desc")
     }
 }
