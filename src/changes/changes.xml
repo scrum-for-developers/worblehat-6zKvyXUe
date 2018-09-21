@@ -59,6 +59,9 @@
 			<action dev="Tommy, Philipp" type="update">
 				WB-106: Books can be removed from stock.
 			</action>
+			<action dev="Dennis" type="update">
+				WB-120: Details page added.
+			</action>
 		</release>
 	</body>
 </document>

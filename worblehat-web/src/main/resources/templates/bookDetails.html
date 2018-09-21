@@ -4,12 +4,9 @@
 	<title>Show all Books</title>
 </head>
 <body>
+	<h1 th:text="${book.title}" id="details_title">Harry Potter</h1>
 	<table class="book" cellpadding="10">
 	<tbody>
-		<tr>
-			<td>Titel</td>
-			<td id="details_title" th:text="${book.title}">Harry Potter</td>
-		</tr>
 		<tr>
 			<td>Author</td>
 			<td id="details_author"th:text="${book.author}">J.K. Rowling</td>
