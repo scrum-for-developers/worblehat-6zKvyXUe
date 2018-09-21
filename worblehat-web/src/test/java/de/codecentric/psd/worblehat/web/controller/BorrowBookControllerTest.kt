@@ -82,14 +82,14 @@ class BorrowBookControllerTest {
 
         val navigateTo = borrowBookController.processSubmit(bookBorrowFormData, bindingResult)
         verify(bookService).borrowBook(TEST_BOOK.isbn, BORROWER_EMAIL)
-        assertThat(navigateTo, `is`("home"))
+        assertThat(navigateTo, `is`("redirect:/bookList"))
     }
 
     @Test
     fun shouldNavigateToHomeOnErrors() {
         val navigateTo = borrowBookController.handleErrors(Exception(), MockHttpServletRequest())
 
-        assertThat(navigateTo, `is`("home"))
+        assertThat(navigateTo, `is`("redirect:/borrow"))
     }
 
     companion object {

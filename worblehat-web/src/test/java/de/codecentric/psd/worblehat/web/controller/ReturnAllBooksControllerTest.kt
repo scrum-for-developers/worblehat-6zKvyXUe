@@ -59,7 +59,7 @@ class ReturnAllBooksControllerTest {
         val navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult)
 
         verify<BookService>(bookService).returnAllBooksByBorrower(borrower)
-        assertThat(navigateTo, `is`("home"))
+        assertThat(navigateTo, `is`("redirect:/bookList"))
     }
 
     @Test
@@ -74,7 +74,7 @@ class ReturnAllBooksControllerTest {
         val navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult)
 
         verify<BookService>(bookService).returnBookByBorrowerAndIsbn(borrower, isbn)
-        assertThat(navigateTo, `is`("home"))
+        assertThat(navigateTo, `is`("redirect:/bookList"))
     }
 
     @Test
@@ -89,6 +89,6 @@ class ReturnAllBooksControllerTest {
         val navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult)
 
         verify<BookService>(bookService).returnBookByBorrowerAndTitle(borrower, title)
-        assertThat(navigateTo, `is`("home"))
+        assertThat(navigateTo, `is`("redirect:/bookList"))
     }
 }
