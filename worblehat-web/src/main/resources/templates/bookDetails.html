@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Show all Books</title>
+</head>
+<body>
+	<table class="book" cellpadding="10">
+	<tbody>
+		<tr>
+			<td>Titel</td>
+			<td th:text="${book.title}">Harry Potter</td>
+		</tr>
+		<tr>
+			<td>Author</td>
+			<td th:text="${book.author}">J.K. Rowling</td>
+		</tr>
+		<tr>
+			<td>Year</td>
+			<td th:text="${book.yearOfPublication}">1999</td>
+		</tr>
+		<tr>
+			<td>Edition</td>
+			<td th:text="${book.edition}">1</td>
+		</tr>
+		<tr>
+			<td>ISBN</td>
+			<td th:text="${book.isbn}">123456789X</td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td th:text="${book.description}">Lorum Ipsum...</td>
+		</tr>
+	</tbody>
+	</table>
+	<a th:href="@{/bookList}">Back to List</a>
+	<hr />
+	<a th:href="@{/}">Back to Home</a>
+	<br><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block>
+</body>
+</html>

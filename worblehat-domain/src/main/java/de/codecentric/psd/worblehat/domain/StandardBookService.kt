@@ -13,6 +13,9 @@ import java.util.*
 open class StandardBookService @Autowired constructor(
         private val borrowingRepository: BorrowingRepository,
         private val bookRepository: BookRepository) : BookService {
+    override fun findBookById(id: Long): Book {
+        return bookRepository.findById(id).get()
+    }
 
     override fun returnAllBooksByBorrower(borrowerEmailAddress: String) {
         with(borrowingRepository) {

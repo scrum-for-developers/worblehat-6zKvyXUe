@@ -11,7 +11,7 @@ class Book() : Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long = 0
+    val id: Long = 0
 
     var title: String = ""
     var author: String = ""

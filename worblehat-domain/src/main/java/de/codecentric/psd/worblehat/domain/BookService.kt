@@ -17,6 +17,8 @@ interface BookService {
 
     fun findBooksByIsbn(isbn: String): Set<Book>
 
+    fun findBookById(id: Long): Book
+
     fun findAllBooks(): List<Book>
 
     fun findBooksByEmail(email: String): List<Borrowing>
