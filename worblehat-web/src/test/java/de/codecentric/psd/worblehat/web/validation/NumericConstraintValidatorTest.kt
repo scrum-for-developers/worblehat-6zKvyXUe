@@ -10,41 +10,34 @@ import javax.validation.ConstraintValidatorContext
 
 class NumericConstraintValidatorTest {
 
-    private var numericConstraintValidator: NumericConstraintValidator? = null
-
+    private var numericConstraintValidator = NumericConstraintValidator()
     private var constraintValidatorContext: ConstraintValidatorContext = mock()
-
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-        numericConstraintValidator = NumericConstraintValidator()
-    }
 
     @Test
     @Throws(Exception::class)
     fun initializeShouldTakeNumeric() {
         val numeric = mock(Numeric::class.java)
-        numericConstraintValidator!!.initialize(numeric)
+        numericConstraintValidator.initialize(numeric)
     }
 
     @Test
     @Throws(Exception::class)
     fun shouldReturnTrueIfBlank() {
-        val actual = numericConstraintValidator!!.isValid("", constraintValidatorContext)
+        val actual = numericConstraintValidator.isValid("", constraintValidatorContext)
         assertTrue(actual)
     }
 
     @Test
     @Throws(Exception::class)
     fun shouldReturnTrueIfNumeric() {
-        val actual = numericConstraintValidator!!.isValid("1", constraintValidatorContext)
+        val actual = numericConstraintValidator.isValid("1", constraintValidatorContext)
         assertTrue(actual)
     }
 
     @Test
     @Throws(Exception::class)
     fun shouldReturnFalseIfNotNumeric() {
-        val actual = numericConstraintValidator!!.isValid("x", constraintValidatorContext)
+        val actual = numericConstraintValidator.isValid("x", constraintValidatorContext)
         assertFalse(actual)
     }
 }

@@ -22,35 +22,30 @@ import java.util.*
 
 class InsertBookControllerTest {
 
-    private var insertBookController: InsertBookController? = null
-
-    private var bookService: BookService = mock()
-
-    private var bookDataFormData: BookDataFormData? = null
-
-    private var bindingResult: BindingResult? = null
+    private lateinit var insertBookController: InsertBookController
+    private val bookService: BookService = mock()
+    private val bookDataFormData = BookDataFormData()
+    private val bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
 
     @Before
     fun setUp() {
         insertBookController = InsertBookController(bookService)
-        bookDataFormData = BookDataFormData()
-        bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
     }
 
     @Test
     fun shouldSetupForm() {
         val modelMap = ModelMap()
 
-        insertBookController!!.setupForm(modelMap)
+        insertBookController.setupForm(modelMap)
 
-        assertThat<Any>(modelMap["bookDataFormData"], `is`(not(nullValue())))
+        assertThat(modelMap["bookDataFormData"], `is`(not(nullValue())))
     }
 
     @Test
     fun shouldRejectErrors() {
-        bindingResult!!.addError(ObjectError("", ""))
+        bindingResult.addError(ObjectError("", ""))
 
-        val navigateTo = insertBookController!!.processSubmit(bookDataFormData!!, bindingResult!!)
+        val navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult)
 
         assertThat(navigateTo, `is`("insertBooks"))
     }
@@ -61,7 +56,7 @@ class InsertBookControllerTest {
         whenever(bookService.bookExists(TEST_BOOK.isbn)).thenReturn(true)
         whenever(bookService.createBook(any(), any(), any(), any(), anyInt(), any())).thenReturn(Optional.of(TEST_BOOK))
 
-        val navigateTo = insertBookController!!.processSubmit(bookDataFormData!!, bindingResult!!)
+        val navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult)
 
         verifyBookIsCreated()
         assertThat(navigateTo, `is`("redirect:bookList"))
@@ -73,7 +68,7 @@ class InsertBookControllerTest {
         whenever(bookService.bookExists(TEST_BOOK.isbn)).thenReturn(false)
         whenever(bookService.createBook(any(), any(), any(), any(), anyInt(), any())).thenReturn(Optional.of(TEST_BOOK))
 
-        val navigateTo = insertBookController!!.processSubmit(bookDataFormData!!, bindingResult!!)
+        val navigateTo = insertBookController.processSubmit(bookDataFormData, bindingResult)
 
         verifyBookIsCreated()
         assertThat(navigateTo, `is`("redirect:bookList"))
@@ -85,12 +80,12 @@ class InsertBookControllerTest {
     }
 
     private fun setupFormData() {
-        bookDataFormData!!.title = TEST_BOOK.title
-        bookDataFormData!!.author = TEST_BOOK.author
-        bookDataFormData!!.edition = TEST_BOOK.edition
-        bookDataFormData!!.isbn = TEST_BOOK.isbn
-        bookDataFormData!!.yearOfPublication = TEST_BOOK.yearOfPublication.toString()
-        bookDataFormData!!.description = TEST_BOOK.description
+        bookDataFormData.title = TEST_BOOK.title
+        bookDataFormData.author = TEST_BOOK.author
+        bookDataFormData.edition = TEST_BOOK.edition
+        bookDataFormData.isbn = TEST_BOOK.isbn
+        bookDataFormData.yearOfPublication = TEST_BOOK.yearOfPublication.toString()
+        bookDataFormData.description = TEST_BOOK.description
     }
 
     companion object {

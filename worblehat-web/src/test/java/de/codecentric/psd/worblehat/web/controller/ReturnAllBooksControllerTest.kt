@@ -1,5 +1,6 @@
 package de.codecentric.psd.worblehat.web.controller
 
+import com.nhaarman.mockitokotlin2.mock
 import de.codecentric.psd.worblehat.domain.BookService
 import de.codecentric.psd.worblehat.web.formdata.ReturnAllBooksFormData
 import org.hamcrest.CoreMatchers.`is`
@@ -18,21 +19,15 @@ import java.util.*
 
 class ReturnAllBooksControllerTest {
 
-    private var returnAllBooksController: ReturnAllBooksController? = null
-
-    private var bookService: BookService? = null
-
-    private var returnAllBooksFormData: ReturnAllBooksFormData? = null
-
-    private var bindingResult: BindingResult? = null
+    private lateinit var returnAllBooksController: ReturnAllBooksController
+    private val bookService: BookService = mock()
+    private val returnAllBooksFormData = ReturnAllBooksFormData()
+    private val bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
 
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        bookService = mock(BookService::class.java)
-        returnAllBooksController = ReturnAllBooksController(bookService!!)
-        returnAllBooksFormData = ReturnAllBooksFormData()
-        bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
+        returnAllBooksController = ReturnAllBooksController(bookService)
     }
 
     @Test
@@ -40,7 +35,7 @@ class ReturnAllBooksControllerTest {
     fun shouldSetupForm() {
         val modelMap = ModelMap()
 
-        returnAllBooksController!!.prepareView(modelMap)
+        returnAllBooksController.prepareView(modelMap)
 
         assertThat<Any>(modelMap["returnAllBookFormData"], `is`(not(nullValue())))
     }
@@ -48,9 +43,9 @@ class ReturnAllBooksControllerTest {
     @Test
     @Throws(Exception::class)
     fun shouldRejectErrors() {
-        bindingResult!!.addError(ObjectError("", ""))
+        bindingResult.addError(ObjectError("", ""))
 
-        val navigateTo = returnAllBooksController!!.returnAllBooks(returnAllBooksFormData!!, bindingResult!!)
+        val navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult)
 
         assertThat(navigateTo, `is`("returnAllBooks"))
     }
@@ -59,9 +54,9 @@ class ReturnAllBooksControllerTest {
     @Throws(Exception::class)
     fun shouldReturnAllBooksAndNavigateHome() {
         val borrower = "someone@codecentric.de"
-        returnAllBooksFormData!!.emailAddress = borrower
+        returnAllBooksFormData.emailAddress = borrower
 
-        val navigateTo = returnAllBooksController!!.returnAllBooks(returnAllBooksFormData!!, bindingResult!!)
+        val navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult)
 
         verify<BookService>(bookService).returnAllBooksByBorrower(borrower)
         assertThat(navigateTo, `is`("home"))
@@ -72,11 +67,11 @@ class ReturnAllBooksControllerTest {
     fun shouldReturnBookByIsbnAndNavigateHome() {
         val borrower = "someone@codecentric.de"
         val isbn = "123456789X"
-        returnAllBooksFormData!!.emailAddress = borrower
-        returnAllBooksFormData!!.isbn = isbn
-        returnAllBooksFormData!!.radioButtonSelection = "ISBN"
+        returnAllBooksFormData.emailAddress = borrower
+        returnAllBooksFormData.isbn = isbn
+        returnAllBooksFormData.radioButtonSelection = "ISBN"
 
-        val navigateTo = returnAllBooksController!!.returnAllBooks(returnAllBooksFormData!!, bindingResult!!)
+        val navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult)
 
         verify<BookService>(bookService).returnBookByBorrowerAndIsbn(borrower, isbn)
         assertThat(navigateTo, `is`("home"))
@@ -87,11 +82,11 @@ class ReturnAllBooksControllerTest {
     fun shouldReturnBookByTitleAndNavigateHome() {
         val borrower = "someone@codecentric.de"
         val title = "A book"
-        returnAllBooksFormData!!.emailAddress = borrower
-        returnAllBooksFormData!!.title = title
-        returnAllBooksFormData!!.radioButtonSelection = "Title"
+        returnAllBooksFormData.emailAddress = borrower
+        returnAllBooksFormData.title = title
+        returnAllBooksFormData.radioButtonSelection = "Title"
 
-        val navigateTo = returnAllBooksController!!.returnAllBooks(returnAllBooksFormData!!, bindingResult!!)
+        val navigateTo = returnAllBooksController.returnAllBooks(returnAllBooksFormData, bindingResult)
 
         verify<BookService>(bookService).returnBookByBorrowerAndTitle(borrower, title)
         assertThat(navigateTo, `is`("home"))

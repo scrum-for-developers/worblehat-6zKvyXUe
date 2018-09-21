@@ -13,15 +13,13 @@ import org.springframework.ui.ModelMap
 
 class BookListControllerTest {
 
-    private var bookService: BookService = mock()
+    private val bookService: BookService = mock()
     private lateinit var bookListController: BookListController
-    private lateinit var modelMap: ModelMap
+    private val modelMap = ModelMap()
 
     @Before
     fun setUp() {
-        bookService = mock(BookService::class.java)
         bookListController = BookListController(bookService)
-        modelMap = ModelMap()
     }
 
     @Test

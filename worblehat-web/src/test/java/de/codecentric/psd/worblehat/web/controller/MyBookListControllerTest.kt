@@ -1,5 +1,6 @@
 package de.codecentric.psd.worblehat.web.controller
 
+import com.nhaarman.mockitokotlin2.mock
 import de.codecentric.psd.worblehat.domain.BookService
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -12,21 +13,21 @@ import org.springframework.ui.ModelMap
 
 class MyBookListControllerTest {
 
-    private var myBookListController: MyBookListController? = null
+    private lateinit var myBookListController: MyBookListController
+    private val bookService: BookService = mock()
 
     @Before
     fun setUp() {
-        val bookService = mock(BookService::class.java)
-        this.myBookListController = MyBookListController(bookService)
+        myBookListController = MyBookListController(bookService)
     }
 
     @Test
     fun shouldSetupForm() {
         val modelMap = ModelMap()
 
-        val navigateTo = myBookListController!!.setupForm(modelMap, "me@me.de")
+        val navigateTo = myBookListController.setupForm(modelMap, "me@me.de")
 
-        assertThat<Any>(modelMap["borrowings"], `is`(not(nullValue())))
+        assertThat(modelMap["borrowings"], `is`(not(nullValue())))
         assertThat(navigateTo, `is`("myBooksList"))
     }
 

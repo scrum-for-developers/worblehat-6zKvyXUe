@@ -23,18 +23,13 @@ import java.util.*
 
 class BorrowBookControllerTest {
 
-    private var bookService: BookService = mock()
-
-    private var borrowBookController: BorrowBookController? = null
-
-    private var bindingResult: BindingResult? = null
-
-    private var bookBorrowFormData: BookBorrowFormData? = null
+    private val bookService: BookService = mock()
+    private lateinit var borrowBookController: BorrowBookController
+    private val bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
+    private val bookBorrowFormData = BookBorrowFormData()
 
     @Before
     fun setUp() {
-        bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
-        bookBorrowFormData = BookBorrowFormData()
         borrowBookController = BorrowBookController(bookService)
     }
 
@@ -42,16 +37,16 @@ class BorrowBookControllerTest {
     fun shouldSetupForm() {
         val modelMap = ModelMap()
 
-        borrowBookController!!.setupForm(modelMap)
+        borrowBookController.setupForm(modelMap)
 
         assertThat<Any>(modelMap["borrowFormData"], `is`(not(nullValue())))
     }
 
     @Test
     fun shouldNavigateToBorrowWhenResultHasErrors() {
-        bindingResult!!.addError(ObjectError("", ""))
+        bindingResult.addError(ObjectError("", ""))
 
-        val navigateTo = borrowBookController!!.processSubmit(bookBorrowFormData!!, bindingResult!!)
+        val navigateTo = borrowBookController.processSubmit(bookBorrowFormData, bindingResult)
 
         assertThat(navigateTo, `is`("borrow"))
     }
@@ -60,39 +55,39 @@ class BorrowBookControllerTest {
     fun shouldRejectBorrowingIfBookDoesNotExist() {
         whenever(bookService.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(null)
 
-        val navigateTo = borrowBookController!!.processSubmit(bookBorrowFormData!!, bindingResult!!)
+        val navigateTo = borrowBookController.processSubmit(bookBorrowFormData, bindingResult)
 
-        assertThat(bindingResult!!.hasFieldErrors("isbn"), `is`(true))
+        assertThat(bindingResult.hasFieldErrors("isbn"), `is`(true))
         assertThat(navigateTo, `is`("borrow"))
     }
 
     @Test
     fun shouldRejectAlreadyBorrowedBooks() {
-        bookBorrowFormData!!.email = BORROWER_EMAIL
-        bookBorrowFormData!!.isbn = TEST_BOOK.isbn
+        bookBorrowFormData.email = BORROWER_EMAIL
+        bookBorrowFormData.isbn = TEST_BOOK.isbn
         whenever(bookService.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(setOf(TEST_BOOK))
-        val navigateTo = borrowBookController!!.processSubmit(bookBorrowFormData!!, bindingResult!!)
+        val navigateTo = borrowBookController.processSubmit(bookBorrowFormData, bindingResult)
 
-        assertThat(bindingResult!!.hasFieldErrors("isbn"), `is`(true))
-        assertThat(bindingResult!!.getFieldError("isbn")!!.code, `is`("noBorrowableBooks"))
+        assertThat(bindingResult.hasFieldErrors("isbn"), `is`(true))
+        assertThat(bindingResult.getFieldError("isbn")?.code, `is`("noBorrowableBooks"))
         assertThat(navigateTo, `is`("borrow"))
     }
 
     @Test
     fun shouldNavigateHomeOnSuccess() {
-        bookBorrowFormData!!.email = BORROWER_EMAIL
-        bookBorrowFormData!!.isbn = TEST_BOOK.isbn
+        bookBorrowFormData.email = BORROWER_EMAIL
+        bookBorrowFormData.isbn = TEST_BOOK.isbn
         whenever(bookService.findBooksByIsbn(TEST_BOOK.isbn)).thenReturn(setOf(TEST_BOOK))
         whenever(bookService.borrowBook(any(), any())).thenReturn(Optional.of(Borrowing(TEST_BOOK, BORROWER_EMAIL)))
 
-        val navigateTo = borrowBookController!!.processSubmit(bookBorrowFormData!!, bindingResult!!)
+        val navigateTo = borrowBookController.processSubmit(bookBorrowFormData, bindingResult)
         verify(bookService).borrowBook(TEST_BOOK.isbn, BORROWER_EMAIL)
         assertThat(navigateTo, `is`("home"))
     }
 
     @Test
     fun shouldNavigateToHomeOnErrors() {
-        val navigateTo = borrowBookController!!.handleErrors(Exception(), MockHttpServletRequest())
+        val navigateTo = borrowBookController.handleErrors(Exception(), MockHttpServletRequest())
 
         assertThat(navigateTo, `is`("home"))
     }

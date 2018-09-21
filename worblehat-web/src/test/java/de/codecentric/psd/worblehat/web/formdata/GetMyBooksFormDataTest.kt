@@ -7,29 +7,23 @@ import org.junit.Test
 
 class GetMyBooksFormDataTest {
 
-    private var formData: GetMyBooksFormData? = null
-
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-        formData = GetMyBooksFormData()
-    }
+    private val formData = GetMyBooksFormData()
 
     @Test
     fun getEmailAddressWithWhitespaces() {
-        formData!!.emailAddress = " mit "
-        assertThat(formData!!.emailAddress, `is`("mit"))
+        formData.emailAddress = " mit "
+        assertThat(formData.emailAddress, `is`("mit"))
     }
 
     @Test
     fun getEmailAddressWithoutWhitespaces() {
-        formData!!.emailAddress = "ohne"
-        assertThat(formData!!.emailAddress, `is`("ohne"))
+        formData.emailAddress = "ohne"
+        assertThat(formData.emailAddress, `is`("ohne"))
     }
 
     @Test
     fun getNullEmail() {
-        formData!!.emailAddress = ""
-        assertThat(formData!!.emailAddress, `is`(""))
+        formData.emailAddress = ""
+        assertThat(formData.emailAddress, `is`(""))
     }
 }

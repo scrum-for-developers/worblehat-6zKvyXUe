@@ -15,37 +15,30 @@ import java.util.*
 
 class GetMyBooksControllerTest {
 
-    private var getMyBooksController: GetMyBooksController? = null
-    private var formData: GetMyBooksFormData? = null
-    private var bindingResult: BindingResult? = null
-
-    @Before
-    fun setUp() {
-        this.getMyBooksController = GetMyBooksController()
-        this.formData = GetMyBooksFormData()
-        this.bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
-    }
+    private val getMyBooksController = GetMyBooksController()
+    private val formData: GetMyBooksFormData = GetMyBooksFormData()
+    private val bindingResult = MapBindingResult(HashMap<Any, Any>(), "")
 
     @Test
     fun shouldPrepareView() {
         val modelMap = ModelMap()
 
-        getMyBooksController!!.prepareView(modelMap)
+        getMyBooksController.prepareView(modelMap)
 
         assertThat<Any>(modelMap["getMyBooksFormData"], `is`(not(nullValue())))
     }
 
     @Test
     fun shouldRejectError() {
-        bindingResult!!.addError(ObjectError("", ""))
-        val navigateTo = getMyBooksController!!.getMyBooks(formData!!, bindingResult!!)
+        bindingResult.addError(ObjectError("", ""))
+        val navigateTo = getMyBooksController.getMyBooks(formData, bindingResult)
         assertThat(navigateTo, `is`("getMyBooks"))
     }
 
     @Test
     fun shouldRedirectToMyBooks() {
-        formData!!.emailAddress = "me@me.me"
-        val navigateTo = getMyBooksController!!.getMyBooks(formData!!, bindingResult!!)
+        formData.emailAddress = "me@me.me"
+        val navigateTo = getMyBooksController.getMyBooks(formData, bindingResult)
         assertThat(navigateTo, `is`("redirect:myBooksList?email=me@me.me"))
     }
 }
