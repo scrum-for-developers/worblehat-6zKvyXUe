@@ -12,7 +12,7 @@
 <div id="main">
     <h1 class="comicsans">Borrow Book</h1>
 
-    <div class="container-fluid" style="max-width: 400px; margin-left: 0 !important;">
+    <div class="container-fluid" style="max-width: 600px; margin-left: 0 !important;">
         <form th:object="${borrowFormData}" method="POST">
             <div class="form-group row">
                 <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
@@ -35,19 +35,6 @@
             </div>
         </form>
     </div>
-<!--
-    <form th:object="${borrowFormData}" method="POST">
-        ISBN:<input id="isbn" type="text" th:field="*{isbn}" />
-        <span id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-        <br />
-        Email:<input id="email" type="text" th:field="*{email}" />
-        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-        <br />
-        <input type="submit" id="borrowBook" value="Borrow Book" />
-        <hr />
-        <a th:href="@{/}">Back to Home</a>
-    </form>
-    -->
 </div>
 
 <div class="footer">
