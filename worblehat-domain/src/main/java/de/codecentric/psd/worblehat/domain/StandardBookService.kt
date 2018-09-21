@@ -54,6 +54,10 @@ open class StandardBookService @Autowired constructor(
         return bookRepository.findAllByOrderByTitle()
     }
 
+    override fun findBookById(id: Long): Optional<Book> {
+        return bookRepository.findById(id)
+    }
+
     override fun findBooksByEmail(email: String): List<Borrowing> {
         return borrowingRepository.findBorrowingsByBorrower(email)
     }
@@ -99,5 +103,16 @@ open class StandardBookService @Autowired constructor(
         bookRepository.deleteAll()
     }
 
+    override fun deleteBookById(id: Long) {
+        val book = findBookById(id)
 
+        if (book.isPresent) {
+            val borrowing: Borrowing? = borrowingRepository.findBorrowingForBook(book.get())
+
+            if (borrowing == null) {
+                bookRepository.deleteById(id)
+            }
+        }
+
+    }
 }

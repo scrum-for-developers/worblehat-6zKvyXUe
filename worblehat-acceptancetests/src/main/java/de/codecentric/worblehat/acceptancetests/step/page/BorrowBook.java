@@ -2,7 +2,6 @@ package de.codecentric.worblehat.acceptancetests.step.page;
 
 import de.codecentric.worblehat.acceptancetests.adapter.wrapper.Page;
 import de.codecentric.worblehat.acceptancetests.adapter.wrapper.PageElement;
-import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
@@ -38,7 +37,7 @@ public class BorrowBook {
 		seleniumAdapter.typeIntoField("isbn", isbn);
 		seleniumAdapter.clickOnPageElement(PageElement.BORROWBOOKBUTTON);
 	}
-	
+
 	// *****************
 	// *** T H E N *****
 	// *****************

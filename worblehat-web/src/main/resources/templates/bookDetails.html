@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Show all Books</title>
+</head>
+<body>
+	<h1 th:text="${book.title}" id="details_title">Harry Potter</h1>
+	<table class="book" cellpadding="10">
+	<tbody>
+		<tr>
+			<td>Author</td>
+			<td id="details_author"th:text="${book.author}">J.K. Rowling</td>
+		</tr>
+		<tr>
+			<td>Year</td>
+			<td id="details_year" th:text="${book.yearOfPublication}">1999</td>
+		</tr>
+		<tr>
+			<td>Edition</td>
+			<td id="details_edition" th:text="${book.edition}">1</td>
+		</tr>
+		<tr>
+			<td>ISBN</td>
+			<td id="details_isbn" th:text="${book.isbn}">123456789X</td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td id="details_description" th:text="${book.description}">Lorum Ipsum...</td>
+		</tr>
+		<tr>
+			<td>Current borrower</td>
+			<td th:text="${book.borrowing?.borrowerEmailAddress}">Mr. X</td>
+		</tr>
+        <tr>
+            <td>Remove</td>
+            <td>
+                <form th:switch="${book?.borrowing}" th:action="@{/bookDetails/delete/{id}(id=${book.id})}" method="get">
+                    <button th:case="null" type="submit">Remove</button>
+                    <button th:case="*" type="submit" disabled>Remove</button>
+                </form>
+            </td>
+        </tr>
+	</tbody>
+	</table>
+	<a th:href="@{/bookList}">Back to List</a>
+	<hr />
+	<a th:href="@{/}">Back to Home</a>
+	<br><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block>
+</body>
+</html>

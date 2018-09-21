@@ -19,6 +19,7 @@
 			<th scope="col">ISBN</th>
 			<th scope="col">Description</th>
 			<th scope="col">Borrower</th>
+			<th scope="col">Remove</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -30,6 +31,13 @@
 			<td th:text="${book.isbn}">123456</td>
 			<td style="max-width:400px; white-space: pre-line; word-wrap: break-word;" th:text="${book.description}">description</td>
 			<td th:text="${book?.borrowing?.borrowerEmailAddress}">someone@codecentric.de</td>
+            <td>
+                <form th:switch="${book?.borrowing}" th:action="@{/bookList/delete/{id}(id=${book.id})}" method="get">
+			        <button th:case="null" type="submit">Remove</button>
+                    <button th:case="*" type="submit" disabled>Remove</button>
+                </form>
+            </td>
+			<td><a th:href="@{/bookDetails(id=${book.id})}">Details</a></td>
 
 		</tr>
 	</tbody>

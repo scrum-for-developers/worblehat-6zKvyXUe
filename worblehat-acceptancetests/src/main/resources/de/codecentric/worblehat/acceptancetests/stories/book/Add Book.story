@@ -13,6 +13,7 @@ When a librarian adds a book with title <title>, author <author>, edition <editi
 And a librarian adds a book with title <title2>, author <author2>, edition <edition>, year <year> and isbn <isbn>
 Then the booklist contains a book with values title <title>, author <author>, year <year>, edition <edition>, isbn <isbn>
 And the library contains <copies> of the book with <isbn>
+And the librarian can see the details of the book with isbn <isbn>
 
 Examples:
  
