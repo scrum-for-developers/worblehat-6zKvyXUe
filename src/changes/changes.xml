@@ -42,7 +42,7 @@
 		</release>
 
 		<release version="1.3.0" date="2018-09-20"
-				 description="Releasse with much improved functionality">
+				 description="Release with much improved functionality">
 			<action dev="Tommy" type="update">
 				WB-115: Clean whitespaces in form input data.
 			</action>
@@ -51,6 +51,13 @@
 			</action>
 			<action dev="Philipp" type="update">
 				WB-117: Accept 10- and 13-digit ISBN.
+			</action>
+		</release>
+
+		<release version="1.4.0" date="2018-09-21"
+				 description="Release with fancy features">
+			<action dev="Tommy, Philipp" type="update">
+				WB-106: Books can be removed from stock.
 			</action>
 		</release>
 	</body>
