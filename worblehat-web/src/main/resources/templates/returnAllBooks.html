@@ -11,21 +11,21 @@
 
 <div th:replace="fragments/menu :: menu">...</div>
 <div id="main">
-	<h1>Return Books</h1>
+	<h1 class="comicsans">Return Books</h1>
 
 	<div class="container-fluid" style="max-width: 600px; margin-left: 0 !important;">
 		<form th:object="${returnAllBookFormData}" method="POST">
 			<div class="form-group row">
 				<label for="emailAddress" class="col-sm-2 col-form-label">Email</label>
 				<div class="col-sm-10">
-					<input type="email" class="form-control" id="emailAddress" placeholder="Email">
+					<input type="email" class="form-control" id="emailAddress" placeholder="Email" th:field="*{emailAddress}">
 					<span class="form-error" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="isbn" placeholder="ISBN">
+					<input type="text" class="form-control" id="isbn" placeholder="ISBN" th:field="*{isbn}">
 					<span class="form-error" id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
 				</div>
 			</div>
@@ -56,6 +56,10 @@
 	</div>
 </div>
 
+<div class="footer">
+	<div class="footer-content"><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block></div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
@@ -66,30 +70,5 @@
 		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 		crossorigin="anonymous"></script>
 
-<!--
-	<form th:object="${returnAllBookFormData}" method="POST">
-		 Email Address:<input id="emailAddress" type="text" th:field="*{emailAddress}" />
-		<span th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
-		<br />
-		ISBN:<input id="isbn" type="text" th:field="*{isbn}" />
-		<span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-		<br />
-		Title:<input id="title" type="text" th:field="*{title}" />
-		<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-		<ul>
-			<li th:each="ty : *{radioButtonValues}">
-				<input type="radio" th:field="*{radioButtonSelection}" th:value="${ty}" th:checked="*{radioButtonSelection}" />
-				<label th:for="${ty}" th:text="${ty}"></label>
-			</li>
-		</ul>
-		<br />
-        <p>If you don't enter an ISBN or title all books will be returned.</p>
-		<input type="submit" id="returnAllBooks" value="Return Book(s)" />
-
-	</form>
--->
-	<hr />
-	<a th:href="@{/}">Back to Home</a>
-	<br><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block>
 </body>
 </html>

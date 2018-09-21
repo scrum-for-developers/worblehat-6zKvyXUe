@@ -11,6 +11,6 @@ class NavigationControllerTest {
     fun shouldNavigateToHome() {
         val navigateTo = NavigationController().home()
 
-        assertThat(navigateTo, `is`("home"))
+        assertThat(navigateTo, `is`("redirect:/bookList"))
     }
 }

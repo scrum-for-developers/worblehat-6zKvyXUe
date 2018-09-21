@@ -41,7 +41,7 @@ open class BorrowBookController @Autowired constructor(private val bookService: 
         val borrowing = bookService.borrowBook(borrowFormData.isbn, borrowFormData.email)
 
         return borrowing
-                .map { "home" }
+                .map { "redirect:/bookList" }
                 .orElseGet {
                     result.rejectValue("isbn", "noBorrowableBooks")
                     TARGET_BORROW_PAGE
@@ -55,6 +55,6 @@ open class BorrowBookController @Autowired constructor(private val bookService: 
 
     companion object {
         const val TARGET_BORROW_PAGE = "borrow"
-        const val ERROR_HANDLING_REDIRECT = "home"
+        const val ERROR_HANDLING_REDIRECT = "redirect:/borrow"
     }
 }

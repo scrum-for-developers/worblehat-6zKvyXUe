@@ -38,7 +38,7 @@ open class ReturnAllBooksController @Autowired constructor(private val bookServi
             } else if ("Title" == formData.radioButtonSelection) {
                 bookService.returnBookByBorrowerAndTitle(formData.emailAddress, formData.title)
             }
-            "home"
+            "redirect:/bookList"
         }
     }
 

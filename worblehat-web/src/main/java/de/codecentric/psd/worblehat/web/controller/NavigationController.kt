@@ -16,7 +16,7 @@ open class NavigationController {
     }
 
     companion object {
-        const val HOME_NAVIGATION = "home"
+        const val HOME_NAVIGATION = "redirect:/bookList"
     }
 
 }
