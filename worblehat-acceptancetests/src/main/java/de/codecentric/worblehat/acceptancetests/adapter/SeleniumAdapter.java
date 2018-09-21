@@ -56,6 +56,11 @@ public class SeleniumAdapter {
         driver.get(concreteUrl);
     }
 
+    public void gotoPage(Page page, String... params) {
+        String concreteUrl = Config.getApplicationURL() + "/" + String.format(page.getUrl(), params);
+        driver.get(concreteUrl);
+    }
+
     public void typeIntoField(String id, String value) {
         WebElement element = driver.findElement(By.id(id));
         element.clear();
