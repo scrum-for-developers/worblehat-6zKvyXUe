@@ -4,6 +4,29 @@
     margin-top: 8px;
 }
 
+#menu {
+    position: fixed;
+    left: 16px;
+    top: 16px;
+    width: 160px;
+}
+
+#main {
+    margin-left: 160px;
+}
+
+body {
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+h1 {
+    margin-left: 14px;
+}
+
+.form-error {
+    color: red;
+}
 h1.comicsans {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     margin: 10px;

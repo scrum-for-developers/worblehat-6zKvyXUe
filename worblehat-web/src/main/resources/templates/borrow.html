@@ -1,24 +1,65 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Borrow book - Worblehat Bookmanager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <title>Borrow book - Worblehat Bookmanager</title>
 </head>
 <body>
-	<h1>Borrow Book</h1>
 
-	<form th:object="${borrowFormData}" method="POST">
-		ISBN:<input id="isbn" type="text" th:field="*{isbn}" />
-		<span id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
-		<br />
-		Email:<input id="email" type="text" th:field="*{email}" />
-		<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-		<br />
-		<input type="submit" id="borrowBook" value="Borrow Book" />
-		<hr />
-		<a th:href="@{/}">Back to Home</a>
-		<br><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block>
-	</form>
+<div th:replace="fragments/menu :: menu">...</div>
+<div id="main">
+    <h1>Borrow Book</h1>
 
+    <div class="container-fluid" style="max-width: 400px; margin-left: 0 !important;">
+        <form th:object="${borrowFormData}" method="POST">
+            <div class="form-group row">
+                <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="isbn" placeholder="ISBN">
+                    <span class="form-error" id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <span class="form-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary" id="borrowBook">Borrow Book</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<!--
+    <form th:object="${borrowFormData}" method="POST">
+        ISBN:<input id="isbn" type="text" th:field="*{isbn}" />
+        <span id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+        <br />
+        Email:<input id="email" type="text" th:field="*{email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        <br />
+        <input type="submit" id="borrowBook" value="Borrow Book" />
+        <hr />
+        <a th:href="@{/}">Back to Home</a>
+    </form>
+    -->
+    <br><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

@@ -6,11 +6,12 @@
 <title>Worblehat Bookmanager</title>
 </head>
 <body>
-<h1 id="welcome_heading"><span th:text="${@environment.getProperty('spring.application.name')}"></span></h1>
 
 <div th:replace="fragments/menu :: menu">...</div>
-
-<br><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block>
+<div id="main">
+    <h1 id="welcome_heading"><span th:text="${@environment.getProperty('spring.application.name')}"></span></h1>
+    <br><th:block th:text="${'Application Version: ' + applicationVersion}"></th:block>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
