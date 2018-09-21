@@ -16,8 +16,11 @@
 }
 
 body {
-    margin-left: 16px;
     margin-top: 16px;
+}
+
+table {
+    margin-bottom: 50px;
 }
 
 h1 {
@@ -41,5 +44,7 @@ h1.comicsans {
 }
 
 .footer-content {
-    margin: 15px;
+    position: relative;
+    top: 30%;
+    margin-left: 20px;
 }
