@@ -19,20 +19,25 @@ body {
     margin-top: 16px;
 }
 
-table {
-    margin-bottom: 50px;
-}
+
 
 h1 {
     margin-left: 14px;
 }
 
-.form-error {
-    color: red;
-}
 h1.comicsans {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     margin: 10px;
+}
+
+.form-error {
+    color: red;
+}
+
+.table {
+    width: 98%;
+    margin-bottom: 50px;
+    margin-right: 50px;
 }
 
 .footer {
