@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="menu" th:fragment="menu">
+    <b>Users</b>
+    <ul>
+        <li><a th:href="@{/bookList}">Show all Books</a></li>
+        <li><a th:href="@{/borrow}">Borrow Book</a></li>
+        <li><a th:href="@{/returnAllBooks}">Return Books</a></li>
+        <li><a th:href="@{/getMyBooks}">Get my Books</a></li>
+    </ul>
+    <b>Administrators</b>
+    <ul>
+        <li><a th:href="@{/insertBooks}">Add a new book</a></li>
+    </ul>
+</div>
+</body>
+</html>
