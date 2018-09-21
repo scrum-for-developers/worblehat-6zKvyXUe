@@ -16,7 +16,7 @@
 				<label for="email" class="col-sm-2 col-form-label">Email</label>
 				<div class="col-sm-10">
 					<input id="emailAddress" class="form-control" type="text" th:field="*{emailAddress}" />
-					<span class="form-error" id="email-error" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
+					<span class="error form-error" id="email-error" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
 				</div>
 			</div>
 

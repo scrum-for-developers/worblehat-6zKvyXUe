@@ -18,7 +18,7 @@
 				<label for="title" class="col-sm-2 col-form-label">Title</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="title" th:field="*{title}">
-					<span class="form-error" id="title-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+					<span class="error form-error" id="title-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
 				</div>
 			</div>
 
@@ -26,7 +26,7 @@
 				<label for="edition" class="col-sm-2 col-form-label">Edition</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="edition"  th:field="*{edition}">
-					<span class="form-error" id="edition-error" th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
+					<span class="error form-error" id="edition-error" th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
 				</div>
 			</div>
 
@@ -34,7 +34,7 @@
 				<label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="isbn" th:field="*{isbn}">
-					<span class="form-error" id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
+					<span class="error form-error" id="isbn-error" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></span>
 				</div>
 			</div>
 
@@ -42,15 +42,15 @@
 				<label for="author" class="col-sm-2 col-form-label">Author</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="author"  th:field="*{author}">
-					<span class="form-error" id="author-error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+					<span class="error form-error" id="author-error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="year" class="col-sm-2 col-form-label">Year of Publication</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="year" th:field="*{yearOfPublication}" >
-					<span class="form-error" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}"></span>
+					<input type="text" class="form-control" id="yearOfPublication" th:field="*{yearOfPublication}" >
+					<span class="error form-error" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}"></span>
 				</div>
 			</div>
 
@@ -58,7 +58,7 @@
 				<label for="desc" class="col-sm-2 col-form-label">Description</label>
 				<div class="col-sm-10">
 					<textarea class="form-control" th:field="*{description}" rows="4" cols="50" id="desc" />
-					<span class="form-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+					<span class="error form-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
 				</div>
 			</div>
 
